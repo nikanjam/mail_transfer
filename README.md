@@ -1,80 +1,91 @@
 Mail Transfer Tool
-A Python-based tool to transfer email accounts and their data between servers running cPanel or DirectAdmin. This script automates the process of extracting email backups, creating email accounts on a destination server, transferring email data, and optionally restoring old passwords.
-Features
+A powerful Python tool to seamlessly transfer email accounts and data between cPanel and DirectAdmin servers.
+This script automates the extraction of email backups, creates email accounts on a destination server, transfers email data, and optionally restores old passwords—all with a user-friendly CLI experience.
 
-Supports both cPanel and DirectAdmin control panels for source and destination servers.
-Extracts email backups from .tar, .zst, and .tar.zst archives using zstandard and tarfile.
-Automatically detects the source and destination control panels.
-Transfers email data and updates ownership permissions.
-Generates random passwords for new email accounts or restores old passwords from backups.
-Logs all actions to /var/log/email_transfer.log for troubleshooting.
+✨ Features
 
-Prerequisites
+Cross-Platform Support: Works with both cPanel and DirectAdmin for source and destination servers.
+Backup Extraction: Handles .tar, .zst, and .tar.zst archives using zstandard and tarfile.
+Auto-Detection: Identifies source and destination control panels automatically.
+Data Migration: Transfers email data and updates file ownership permissions.
+Password Management: Generates secure random passwords or restores old ones from backups.
+Progress Tracking: Uses tqdm for real-time extraction and decompression feedback.
+Detailed Logging: Records all actions in /var/log/email_transfer.log.
 
-A Linux server with either cPanel or DirectAdmin installed.
-Python 3.6+ installed on the system.
-uv (a Python package manager) for dependency management (installed via the installer).
-Required Python packages: zstandard, tqdm (automatically installed by the script).
+
+📋 Prerequisites
+Before you begin, ensure you have:
+
+A Linux server with cPanel or DirectAdmin installed.
+Python 3.6+ installed on your system.
+uv (Python package manager) for dependency management (installed via the installer).
+Python packages: zstandard and tqdm (automatically installed).
 Root or sufficient privileges to modify email directories and ownership.
 
-Installation
-Using the Installer
-The easiest way to get started is by using the provided Bash installer script. It will install uv, download the Python script, and set up the environment.
 
-Download the installer:
+🚀 Installation
+Option 1: Using the Installer (Recommended)
+Get started quickly with our Bash installer, which sets up everything for you.
+
+Download the Installer:
 wget https://raw.githubusercontent.com/nikanjam/mail_transfer/main/install.sh -O install.sh
 
-Or use the direct link: Download install.sh
+Or grab it here: Download install.sh
 
-Make the script executable:
+Make it Executable:
 chmod +x install.sh
 
 
-Run the installer:
+Run the Installer:
 ./install.sh
 
 
 
-The installer will:
+What it does:
 
-Check for and install uv if it's not already present.
-Download mail-transfer.py to your current directory.
-Initialize a uv project environment.
-Run the script using uv.
+Installs uv if missing.
+Downloads mail-transfer.py.
+Sets up a uv environment and runs the script.
 
-Manual Installation
-If you prefer to set it up manually:
 
-Clone the repository:git clone https://github.com/nikanjam/mail_transfer.git
+Option 2: Manual Installation
+For more control, set it up manually:
+
+Clone the Repository:
+git clone https://github.com/nikanjam/mail_transfer.git
 cd mail_transfer
 
 
-Install uv:curl -LsSf https://astral.sh/uv/install.sh | sh
+Install uv:
+curl -LsSf https://astral.sh/uv/install.sh | sh
 
 
-Install dependencies:uv add zstandard tqdm
+Install Dependencies:
+uv add zstandard tqdm
 
 
-Run the script:uv run mail-transfer.py
+Run the Script:
+uv run mail-transfer.py
 
 
 
-Usage
 
-Ensure you have an email backup file (e.g., .tar, .zst, or .tar.zst).
-Run the script:uv run mail-transfer.py
+🛠️ Usage
+
+Prepare an email backup file (e.g., .tar, .zst, or .tar.zst).
+Launch the script:uv run mail-transfer.py
 
 
-Follow the prompts:
-Enter the domain name.
-Enter the cPanel or DirectAdmin username.
-Provide the path to the backup file.
+Follow the interactive prompts:
+Enter the domain (e.g., example.com).
+Provide the cPanel/DirectAdmin username.
+Specify the backup file path.
 Confirm the user home directory (/home or /home2).
-Optionally restore old passwords when prompted.
+Choose whether to restore old passwords.
 
 
 
-Example
+Example Run
 $ uv run mail-transfer.py
 Enter the domain: example.com
 Enter the cPanel/DirectAdmin username: user123
@@ -85,18 +96,27 @@ Detected destination control panel: cPanel
 Email accounts found: user1, user2
 Do you want to restore old passwords? (yes/no): yes
 
-Output
 
-Email accounts and their passwords (if newly generated) are saved to email_passwords.txt.
-Logs are written to /var/log/email_transfer.log.
+📤 Output
 
-Notes
+Email Accounts & Passwords: Saved to email_passwords.txt (if newly generated).
+Logs: Stored in /var/log/email_transfer.log for debugging.
 
-Ensure you have write permissions to /var/log/ for logging.
-The script deletes temporary extraction directories after completion.
-For DirectAdmin, you may need to specify a port (default is 2222) when prompted.
 
-Contributing
-Feel free to submit issues or pull requests to improve the tool. Suggestions for additional features or bug fixes are welcome!
-License
+⚠️ Notes
+
+Ensure write access to /var/log/ for logging.
+Temporary extraction directories are cleaned up after completion.
+For DirectAdmin, specify a port (default: 2222) if prompted.
+
+
+🤝 Contributing
+We welcome contributions! To get involved:
+
+Fork the repository.
+Submit a pull request with your changes.
+Report bugs or suggest features via issues.
+
+
+📜 License
 This project is licensed under the MIT License. See the LICENSE file for details.
